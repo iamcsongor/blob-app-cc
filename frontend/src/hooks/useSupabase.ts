@@ -292,27 +292,29 @@ export function useEmployee(id: string) {
     if (!id) return
 
     setScoresLoading(true)
-    Promise.all([
-      supabase
-        .from('blob_scores')
-        .select('*')
-        .eq('employee_id', id)
-        .order('computed_at', { ascending: false })
-        .limit(1)
-        .single()
-        .then((res) => res.data),
-      supabase
-        .from('metric_scores')
-        .select('*')
-        .eq('employee_id', id)
-        .order('computed_at', { ascending: false })
-        .then((res) => res.data || []),
-    ])
-      .then(([score, scores]) => {
-        setBlobScore(score)
-        setMetricScores(scores)
-      })
-      .finally(() => setScoresLoading(false))
+    const fetchScores = async () => {
+      try {
+        const scoreRes = await supabase
+          .from('blob_scores')
+          .select('*')
+          .eq('employee_id', id)
+          .order('computed_at', { ascending: false })
+          .limit(1)
+          .single()
+
+        const metricsRes = await supabase
+          .from('metric_scores')
+          .select('*')
+          .eq('employee_id', id)
+          .order('computed_at', { ascending: false })
+
+        setBlobScore(scoreRes.data)
+        setMetricScores(metricsRes.data || [])
+      } finally {
+        setScoresLoading(false)
+      }
+    }
+    fetchScores()
   }, [id])
 
   return {
@@ -447,13 +449,15 @@ export function usePrograms(orgId?: string) {
     setCountsLoading(true)
     const programIds = (data as Program[]).map((p) => p.id)
 
-    supabase
-      .from('program_enrolments')
-      .select('program_id, id')
-      .in('program_id', programIds)
-      .then((res) => {
+    const fetchCounts = async () => {
+      try {
+        const res = await supabase
+          .from('program_enrolments')
+          .select('program_id, id')
+          .in('program_id', programIds)
+
         const counts = (res.data || []).reduce(
-          (acc, item) => {
+          (acc: Record<string, number>, item: { program_id: string }) => {
             acc[item.program_id] = (acc[item.program_id] || 0) + 1
             return acc
           },
@@ -465,8 +469,11 @@ export function usePrograms(orgId?: string) {
           enrolment_count: counts[p.id] || 0,
         }))
         setProgramsWithCounts(withCounts)
-      })
-      .finally(() => setCountsLoading(false))
+      } finally {
+        setCountsLoading(false)
+      }
+    }
+    fetchCounts()
   }, [data])
 
   return {
@@ -500,13 +507,15 @@ export function useTrophies(orgId?: string) {
     setCountsLoading(true)
     const trophyIds = (data as Trophy[]).map((t) => t.id)
 
-    supabase
-      .from('trophy_awards')
-      .select('trophy_id, id')
-      .in('trophy_id', trophyIds)
-      .then((res) => {
+    const fetchCounts = async () => {
+      try {
+        const res = await supabase
+          .from('trophy_awards')
+          .select('trophy_id, id')
+          .in('trophy_id', trophyIds)
+
         const counts = (res.data || []).reduce(
-          (acc, item) => {
+          (acc: Record<string, number>, item: { trophy_id: string }) => {
             acc[item.trophy_id] = (acc[item.trophy_id] || 0) + 1
             return acc
           },
@@ -518,8 +527,11 @@ export function useTrophies(orgId?: string) {
           award_count: counts[t.id] || 0,
         }))
         setTrophiesWithCounts(withCounts)
-      })
-      .finally(() => setCountsLoading(false))
+      } finally {
+        setCountsLoading(false)
+      }
+    }
+    fetchCounts()
   }, [data])
 
   return {
