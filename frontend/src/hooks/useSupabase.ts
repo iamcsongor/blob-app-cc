@@ -214,12 +214,10 @@ export function useSupabaseQuery<T>(
         query = query.limit(options.limit)
       }
 
-      // Apply single flag
-      if (options?.single) {
-        query = query.single()
-      }
-
-      const { data: result, error: err } = await query
+      // Execute query (with optional .single())
+      const { data: result, error: err } = options?.single
+        ? await query.single()
+        : await query
 
       if (err) {
         throw err
