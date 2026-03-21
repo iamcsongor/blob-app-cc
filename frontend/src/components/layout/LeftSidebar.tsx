@@ -6,14 +6,14 @@ import Link from 'next/link'
 import {
   LayoutDashboard,
   Users,
-  Target,
   Trophy,
   Rss,
   BarChart3,
-  Settings,
   ChevronLeft,
   ChevronRight,
   Sparkles,
+  Plus,
+  LogIn,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -22,6 +22,7 @@ interface NavItem {
   href: string
   icon: React.ReactNode
   badge?: number
+  showSparkle?: boolean
 }
 
 const navItems: NavItem[] = [
@@ -29,16 +30,13 @@ const navItems: NavItem[] = [
     label: 'Dashboard',
     href: '/',
     icon: <LayoutDashboard className="w-5 h-5" />,
+    showSparkle: true,
   },
   {
     label: 'Individuals',
     href: '/individuals',
     icon: <Users className="w-5 h-5" />,
-  },
-  {
-    label: 'Programs',
-    href: '/programs',
-    icon: <Target className="w-5 h-5" />,
+    showSparkle: true,
   },
   {
     label: 'Trophies',
@@ -55,11 +53,6 @@ const navItems: NavItem[] = [
     label: 'Analytics',
     href: '/analytics',
     icon: <BarChart3 className="w-5 h-5" />,
-  },
-  {
-    label: 'Settings',
-    href: '/settings',
-    icon: <Settings className="w-5 h-5" />,
   },
 ]
 
@@ -86,7 +79,7 @@ export function LeftSidebar({ onCollapsedChange }: LeftSidebarProps) {
   return (
     <aside
       className={cn(
-        'fixed left-0 top-16 bottom-0 bg-blob-dark text-white transition-all duration-300 ease-out z-30',
+        'fixed left-0 top-16 bottom-0 bg-blob-dark text-white transition-all duration-300 ease-out z-30 flex flex-col',
         isCollapsed ? 'w-20' : 'w-64'
       )}
     >
@@ -102,8 +95,15 @@ export function LeftSidebar({ onCollapsedChange }: LeftSidebarProps) {
         )}
       </button>
 
+      {/* Logo - Only visible when expanded */}
+      {!isCollapsed && (
+        <div className="px-6 py-6 border-b border-blob-border">
+          <span className="text-xl font-bold text-white tracking-tight">BLOB</span>
+        </div>
+      )}
+
       {/* Navigation Items */}
-      <nav className="pt-6 px-3 space-y-2">
+      <nav className={cn('space-y-2', isCollapsed ? 'px-3 py-6' : 'px-3 py-6')}>
         {navItems.map((item) => (
           <Link
             key={item.href}
@@ -116,8 +116,11 @@ export function LeftSidebar({ onCollapsedChange }: LeftSidebarProps) {
             )}
             title={isCollapsed ? item.label : undefined}
           >
-            <span className={cn('flex-shrink-0', isCollapsed ? '' : '')}>
+            <span className="flex-shrink-0 flex items-center gap-2">
               {item.icon}
+              {item.showSparkle && !isCollapsed && (
+                <span className="text-sm">✦</span>
+              )}
             </span>
             {!isCollapsed && (
               <>
@@ -140,43 +143,71 @@ export function LeftSidebar({ onCollapsedChange }: LeftSidebarProps) {
         ))}
       </nav>
 
-      {/* Watchlist Section */}
-      {!isCollapsed && (
-        <>
-          <div className="mt-8 px-3">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+      {/* Scrollable Middle Section */}
+      <div className="flex-1 overflow-y-auto">
+        {/* Watchlist Section */}
+        {!isCollapsed && (
+          <div className="px-6 py-4 border-t border-blob-border">
+            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">
               Watchlist
             </h3>
-            <div className="space-y-2 min-h-20">
-              {/* Empty watchlist placeholder */}
-              <p className="text-xs text-gray-500 italic">
-                No employees on watchlist yet
-              </p>
+            <div className="space-y-3">
+              {/* Example watchlist items */}
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 rounded-full bg-blob-primary flex-shrink-0 flex items-center justify-center text-xs font-bold text-white">
+                  JD
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-white truncate">John Doe</p>
+                  <p className="text-xs text-blob-primary">+36%</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 rounded-full bg-blob-surface flex-shrink-0 flex items-center justify-center text-xs font-bold text-white">
+                  SM
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-white truncate">Sarah Miller</p>
+                  <p className="text-xs text-red-400">-12%</p>
+                </div>
+              </div>
             </div>
+            {/* Add user button */}
+            <button className="w-full mt-4 flex items-center justify-center gap-2 px-3 py-2 border border-blob-border rounded-lg text-gray-400 hover:text-white hover:bg-blob-surface transition-colors text-sm">
+              <Plus className="w-4 h-4" />
+              Add user
+            </button>
           </div>
+        )}
+      </div>
 
-          {/* Blob GPT Card */}
-          <div className="mt-8 mx-3 p-4 bg-blob-surface border border-blob-border rounded-lg">
-            <div className="flex items-center gap-2 mb-3">
-              <Sparkles className="w-4 h-4 text-blob-primary" />
-              <span className="text-sm font-medium">Blob GPT</span>
-            </div>
-            <p className="text-xs text-gray-400 mb-3">
-              Ask me anything about your team...
-            </p>
-            <input
-              type="text"
-              placeholder="Ask a question..."
-              className="w-full px-3 py-2 bg-blob-dark border border-blob-border rounded-lg text-xs text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blob-primary"
-            />
-          </div>
-        </>
-      )}
-
-      {/* Sign Out Button */}
+      {/* Blob GPT Card and Sign Out - Fixed at bottom */}
       {!isCollapsed && (
-        <div className="absolute bottom-6 left-3 right-3">
-          <button className="w-full px-3 py-2 bg-red-500/10 text-red-400 hover:bg-red-500/20 rounded-lg font-medium text-sm transition-colors">
+        <div className="border-t border-blob-border px-3 py-4 space-y-4">
+          {/* Blob GPT Card */}
+          <div className="p-4 bg-gradient-to-br from-purple-900 to-purple-800 rounded-lg border border-purple-700">
+            <div className="flex items-center gap-2 mb-3">
+              <Sparkles className="w-4 h-4 text-white" />
+              <span className="text-sm font-medium text-white">Blob GPT</span>
+            </div>
+            <p className="text-xs text-gray-300 mb-3 leading-relaxed">
+              Ask me anything...
+            </p>
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Ask..."
+                className="w-full px-3 py-2 bg-purple-950 border border-purple-700 rounded-lg text-xs text-white placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-blob-primary"
+              />
+              <button className="absolute right-1.5 top-1/2 -translate-y-1/2 px-2 py-1 bg-blob-primary text-white text-xs font-medium rounded hover:bg-blob-primary/90 transition-colors">
+                Type here
+              </button>
+            </div>
+          </div>
+
+          {/* Sign Out Button */}
+          <button className="w-full flex items-center justify-center gap-2 px-3 py-2 text-gray-400 hover:text-white transition-colors text-sm">
+            <LogIn className="w-4 h-4" />
             Sign Out
           </button>
         </div>

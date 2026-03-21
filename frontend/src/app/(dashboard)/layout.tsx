@@ -9,10 +9,10 @@ export default function DashboardRootLayout({
 }) {
   return (
     <DashboardLayout
-      userName="Alice Johnson"
-      userRole="Organization Admin"
-      messageCount={0}
-      notificationCount={3}
+      userName="Csongor"
+      userRole="Human Resources Officer"
+      messageCount={4}
+      notificationCount={1}
     >
       {children}
     </DashboardLayout>
