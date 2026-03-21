@@ -495,7 +495,7 @@ export default function EmployeeProfilePage({
           <div className="bg-blob-dark text-white rounded-lg p-5">
             <h3 className="font-semibold mb-3">Risk Status</h3>
             <p className="text-sm text-gray-300 mb-4">
-              Iron Man is in the <span className="font-semibold text-white">"Risks"</span> category and has been for over <span className="font-semibold text-white">4 weeks</span>.
+              Iron Man is in the <span className="font-semibold text-white">&ldquo;Risks&rdquo;</span> category and has been for over <span className="font-semibold text-white">4 weeks</span>.
             </p>
             {/* Dot Matrix Visualization */}
             <svg width="100%" height="80" viewBox="0 0 200 80" preserveAspectRatio="xMidYMid meet" className="w-full">

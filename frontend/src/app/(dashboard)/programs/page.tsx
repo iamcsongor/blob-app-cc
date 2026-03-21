@@ -69,10 +69,8 @@ const ProgramCard = ({ program, onToggleExpand, isExpanded }: { program: Program
   const xpPercent = (program.xpCurrent / program.xpTotal) * 100
 
   let xpBarColor = '#10B981' // Green
-  if (program.xpPercent !== undefined) {
-    if (xpPercent < 40) xpBarColor = '#EF4444'
-    else if (xpPercent < 70) xpBarColor = '#F59E0B'
-  }
+  if (xpPercent < 40) xpBarColor = '#EF4444'
+  else if (xpPercent < 70) xpBarColor = '#F59E0B'
 
   return (
     <div className="bg-blob-surface rounded-lg border border-blob-border p-6">

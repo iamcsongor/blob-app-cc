@@ -47,7 +47,7 @@ export function TopNavbar({
             Hi, {userName}!
           </span>
           <span className="text-xs text-gray-500">
-            Let's see what we can accomplish today
+            Let&apos;s see what we can accomplish today
           </span>
         </div>
       </div>
