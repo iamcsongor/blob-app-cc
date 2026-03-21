@@ -16,7 +16,7 @@ export type UserRole =
 export interface Organisation {
   id: string
   name: string
-  logo_url?: string
+  logo_url: string | null
   timezone: string
   currency: string
   created_at: string
@@ -25,23 +25,26 @@ export interface Organisation {
 
 export interface Department {
   id: string
-  organisation_id: string
+  org_id: string
   name: string
-  manager_id?: string
+  manager_id: string | null
+  team_size: number
+  description: string | null
   created_at: string
   updated_at: string
 }
 
 export interface Employee {
   id: string
-  organisation_id: string
-  department_id?: string
-  email: string
-  first_name: string
-  last_name: string
-  role?: string
-  avatar_url?: string
-  is_active: boolean
+  org_id: string
+  name: string
+  email: string | null
+  department_id: string | null
+  role_title: string | null
+  manager_id: string | null
+  start_date: string | null
+  status: 'active' | 'away' | 'on_leave' | 'offboarded'
+  avatar_url: string | null
   created_at: string
   updated_at: string
 }
@@ -49,105 +52,133 @@ export interface Employee {
 export interface MetricScore {
   id: string
   employee_id: string
+  org_id: string
   category: MetricCategory
   score: number
-  timestamp: string
+  confidence: number
+  computed_at: string
+  created_at: string
 }
 
 export interface BlobScore {
   id: string
   employee_id: string
-  overall_score: number
-  engagement_volume: number
-  reaction_time: number
-  participation: number
-  presence_analysis: number
-  sentiment_analysis: number
-  social_brand_rep: number
-  risk_level: 'low' | 'medium' | 'high'
-  timestamp: string
+  org_id: string
+  score: number
+  interpretation: string
+  computed_at: string
+  created_at: string
 }
 
 export interface Program {
   id: string
-  organisation_id: string
+  org_id: string
   name: string
-  description?: string
-  status: 'draft' | 'active' | 'paused' | 'completed'
+  description: string | null
+  template_type: string
+  status: 'active' | 'paused' | 'completed'
+  duration_weeks: number | null
   created_at: string
   updated_at: string
+  enrolment_count?: number
 }
 
 export interface ProgramEnrolment {
   id: string
   program_id: string
   employee_id: string
-  progress: number
-  status: 'enrolled' | 'completed' | 'dropped'
+  org_id: string
+  status: 'active' | 'completed' | 'dropped'
   enrolled_at: string
-  completed_at?: string
+  completed_at: string | null
+  created_at: string
+  updated_at: string
 }
 
 export interface Trophy {
   id: string
-  organisation_id: string
+  org_id: string
   name: string
-  description?: string
-  icon_url?: string
+  description: string | null
+  icon_url: string | null
+  rarity: 'common' | 'rare' | 'epic' | 'legendary'
+  criteria_type: 'manual' | 'automatic'
+  criteria_config: Record<string, any> | null
   created_at: string
+  award_count?: number
 }
 
 export interface TrophyAward {
   id: string
   trophy_id: string
   employee_id: string
+  org_id: string
   awarded_at: string
+  awarded_by: string | null
+  created_at: string
 }
 
 export interface FeedEvent {
   id: string
-  organisation_id: string
-  employee_id?: string
-  type: string
+  org_id: string
+  event_type: string
   title: string
-  description?: string
-  severity: 'info' | 'warning' | 'critical'
-  timestamp: string
+  description: string | null
+  entity_type: string | null
+  entity_id: string | null
+  tags: string[]
+  created_at: string
 }
 
 export interface ConnectedTool {
   id: string
-  organisation_id: string
+  org_id: string
   tool_name: string
-  is_connected: boolean
-  employee_count?: number
-  connected_at?: string
+  status: 'connected' | 'disconnected' | 'error'
+  employee_count: number
+  last_sync_at: string | null
+  created_at: string
+  updated_at: string
 }
 
 export interface Notification {
   id: string
   user_id: string
+  org_id: string
+  type: 'critical' | 'warning' | 'positive' | 'informational' | 'ai_insight'
   title: string
-  message: string
-  is_read: boolean
+  body: string | null
+  entity_type: string | null
+  entity_id: string | null
+  read: boolean
   created_at: string
 }
 
 export interface WatchlistItem {
   id: string
-  organisation_id: string
-  employee_id: string
-  reason: string
-  added_at: string
+  user_id: string
+  entity_type: 'employee' | 'department'
+  entity_id: string
+  created_at: string
 }
 
 export interface CompanyEvent {
   id: string
-  organisation_id: string
-  title: string
-  description?: string
+  org_id: string
+  name: string
+  event_type: string | null
   event_date: string
+  description: string | null
   created_at: string
+}
+
+export interface User {
+  id: string
+  org_id: string
+  email: string
+  role: UserRole
+  created_at: string
+  updated_at: string
 }
 
 export interface DashboardSummary {
