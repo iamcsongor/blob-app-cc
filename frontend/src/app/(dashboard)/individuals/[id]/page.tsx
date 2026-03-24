@@ -367,7 +367,7 @@ export default function EmployeeProfilePage({
 
             {/* Filter Controls */}
             <div className="space-y-3 border-t border-gray-200 pt-4">
-              <button className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium text-gray-700">
+              <button className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded-xl hover:bg-gray-50 text-sm font-medium text-gray-700">
                 All Company
                 <ChevronDown className="w-4 h-4" />
               </button>
@@ -395,10 +395,10 @@ export default function EmployeeProfilePage({
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg font-semibold text-gray-900">Blob Score Fluctuation</h3>
               <div className="flex items-center gap-3">
-                <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium text-gray-700">
+                <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-xl hover:bg-gray-50 text-sm font-medium text-gray-700">
                   <span>+ Add Event</span>
                 </button>
-                <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm font-medium text-gray-700">
+                <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-xl hover:bg-gray-50 text-sm font-medium text-gray-700">
                   <span>Event Types (4)</span>
                   <ChevronDown className="w-4 h-4" />
                 </button>
@@ -418,7 +418,7 @@ export default function EmployeeProfilePage({
           <div className="bg-white rounded-xl border border-gray-200 p-6">
             <div className="flex items-start justify-between mb-6">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-blob-primary/10 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-blob-primary/10 rounded-xl flex items-center justify-center">
                   <Zap className="w-6 h-6 text-blob-primary" />
                 </div>
                 <div>
@@ -435,7 +435,7 @@ export default function EmployeeProfilePage({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Message Volume */}
-              <div className="border border-gray-200 rounded-lg p-5">
+              <div className="border border-gray-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-4 border-b border-gray-200 pb-3">
                   <button className={`text-sm font-semibold pb-2 px-1 border-b-2 border-blob-primary text-blob-primary`}>All channels</button>
                   <button className="text-sm font-semibold pb-2 px-1 text-gray-600 hover:text-gray-900">Emails</button>
@@ -448,7 +448,7 @@ export default function EmployeeProfilePage({
 
               {/* Pro-active vs Re-active */}
               <div className="space-y-4">
-                <div className="border border-gray-200 rounded-lg p-5">
+                <div className="border border-gray-200 rounded-xl p-5">
                   <p className="text-sm text-gray-600 mb-2">Pro- vs Re-active</p>
                   <p className="text-4xl font-bold text-gray-900 mb-2">{ENGAGEMENT_DETAIL.proReactive.proActive}%</p>
                   <p className="text-sm font-semibold text-green-700 flex items-center gap-1">
@@ -458,7 +458,7 @@ export default function EmployeeProfilePage({
                 </div>
 
                 {/* Mentions */}
-                <div className="border border-gray-200 rounded-lg p-5">
+                <div className="border border-gray-200 rounded-xl p-5">
                   <p className="text-sm text-gray-600 mb-2">@mentions</p>
                   <p className="text-4xl font-bold text-gray-900">{ENGAGEMENT_DETAIL.mentions}</p>
                 </div>
@@ -538,13 +538,13 @@ export default function EmployeeProfilePage({
             {/* Positive/Negative Bar */}
             <div className="space-y-2">
               <div className="flex items-center justify-between text-xs mb-2">
-                <span className="text-gray-500">Sentiment Balance</span>
+                <span className="text-gray-600">Sentiment Balance</span>
               </div>
               <div className="flex h-6 rounded-full overflow-hidden border border-gray-200">
                 <div className="flex-1 bg-gradient-to-r from-green-500 to-emerald-400" />
                 <div className="flex-1 bg-gradient-to-r from-pink-400 to-rose-500" />
               </div>
-              <div className="flex justify-between text-xs text-gray-500 mt-2">
+              <div className="flex justify-between text-xs text-gray-600 mt-2">
                 <span>Positive 48%</span>
                 <span>Negative 52%</span>
               </div>
@@ -578,7 +578,7 @@ export default function EmployeeProfilePage({
                       x={10 + idx * 15 + 6}
                       y="75"
                       fontSize="8"
-                      fill="#9CA3AF"
+                      fill="#6B7280"
                       textAnchor="middle"
                     >
                       {day.day}
@@ -588,7 +588,7 @@ export default function EmployeeProfilePage({
               })}
             </svg>
 
-            <div className="flex justify-between text-xs text-gray-500">
+            <div className="flex justify-between text-xs text-gray-600">
               <span>Start: {WORKING_PATTERNS.startTime}</span>
               <span>End: {WORKING_PATTERNS.endTime}</span>
             </div>
@@ -601,10 +601,10 @@ export default function EmployeeProfilePage({
             {/* Network Graph Preview */}
             <svg width="100%" height="150" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" className="w-full">
               {/* Connections */}
-              <line x1="100" y1="75" x2="50" y2="40" stroke="#D1D5DB" strokeWidth="1" />
-              <line x1="100" y1="75" x2="150" y2="40" stroke="#D1D5DB" strokeWidth="1" />
-              <line x1="100" y1="75" x2="60" y2="120" stroke="#D1D5DB" strokeWidth="1" />
-              <line x1="100" y1="75" x2="140" y2="120" stroke="#D1D5DB" strokeWidth="1" />
+              <line x1="100" y1="75" x2="50" y2="40" stroke="#E5E7EB" strokeWidth="1" />
+              <line x1="100" y1="75" x2="150" y2="40" stroke="#E5E7EB" strokeWidth="1" />
+              <line x1="100" y1="75" x2="60" y2="120" stroke="#E5E7EB" strokeWidth="1" />
+              <line x1="100" y1="75" x2="140" y2="120" stroke="#E5E7EB" strokeWidth="1" />
 
               {/* Central node */}
               <circle cx="100" cy="75" r="8" fill="#10B981" />
