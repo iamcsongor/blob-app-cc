@@ -1,6 +1,6 @@
 'use client'
 
-import { Download } from 'lucide-react'
+import { Download, Users, AlertTriangle, Flame, TrendingUp } from 'lucide-react'
 import React from 'react'
 
 interface StatCard {
@@ -41,8 +41,8 @@ const ScoreDistributionChart = () => {
         y1={height - padding}
         x2={padding}
         y2={20}
-        stroke="#475569"
-        strokeWidth="2"
+        stroke="#D1D5DB"
+        strokeWidth="1"
       />
 
       {/* X-axis line */}
@@ -51,8 +51,8 @@ const ScoreDistributionChart = () => {
         y1={height - padding}
         x2={totalWidth - 20}
         y2={height - padding}
-        stroke="#475569"
-        strokeWidth="2"
+        stroke="#D1D5DB"
+        strokeWidth="1"
       />
 
       {/* Grid lines and labels */}
@@ -61,11 +61,11 @@ const ScoreDistributionChart = () => {
         return (
           <g key={value}>
             <line
-              x1={padding - 5}
+              x1={padding}
               y1={y}
-              x2={padding}
+              x2={totalWidth - 20}
               y2={y}
-              stroke="#475569"
+              stroke="#F3F4F6"
               strokeWidth="1"
             />
             <text
@@ -73,7 +73,7 @@ const ScoreDistributionChart = () => {
               y={y + 4}
               textAnchor="end"
               fontSize="12"
-              fill="#94A3B8"
+              fill="#9CA3AF"
             >
               {value}
             </text>
@@ -96,8 +96,9 @@ const ScoreDistributionChart = () => {
               width={barWidth}
               height={barHeight}
               fill={item.color}
-              rx="4"
-              className="transition-opacity hover:opacity-80"
+              rx="6"
+              opacity="0.85"
+              className="transition-opacity hover:opacity-100"
             />
 
             {/* Value label on top of bar */}
@@ -106,8 +107,8 @@ const ScoreDistributionChart = () => {
               y={y - 8}
               textAnchor="middle"
               fontSize="13"
-              fontWeight="bold"
-              fill="#E2E8F0"
+              fontWeight="600"
+              fill="#374151"
             >
               {item.count}
             </text>
@@ -118,7 +119,7 @@ const ScoreDistributionChart = () => {
               y={height - padding + 20}
               textAnchor="middle"
               fontSize="12"
-              fill="#94A3B8"
+              fill="#6B7280"
             >
               {item.range}
             </text>
@@ -149,7 +150,7 @@ const DepartmentComparisonChart = () => {
   return (
     <svg viewBox={`0 0 ${width} ${totalHeight}`} className="w-full h-full">
       {/* Title */}
-      <text x="10" y="25" fontSize="14" fontWeight="bold" fill="#E2E8F0">
+      <text x="10" y="25" fontSize="14" fontWeight="600" fill="#374151">
         Avg Engagement Score by Department
       </text>
 
@@ -166,7 +167,7 @@ const DepartmentComparisonChart = () => {
               y={barY + barHeight / 2 + 5}
               fontSize="13"
               fontWeight="500"
-              fill="#E2E8F0"
+              fill="#374151"
             >
               {dept.name}
             </text>
@@ -177,8 +178,8 @@ const DepartmentComparisonChart = () => {
               y={barY}
               width="350"
               height={barHeight}
-              fill="#1E293B"
-              rx="4"
+              fill="#F3F4F6"
+              rx="6"
             />
 
             {/* Gradient bar */}
@@ -190,7 +191,7 @@ const DepartmentComparisonChart = () => {
                 x2="100%"
                 y2="0%"
               >
-                <stop offset="0%" stopColor={dept.color} stopOpacity="1" />
+                <stop offset="0%" stopColor={dept.color} stopOpacity="0.9" />
                 <stop offset="100%" stopColor={dept.color} stopOpacity="0.6" />
               </linearGradient>
             </defs>
@@ -201,7 +202,7 @@ const DepartmentComparisonChart = () => {
               width={barWidth}
               height={barHeight}
               fill={`url(#grad-${idx})`}
-              rx="4"
+              rx="6"
             />
 
             {/* Score label */}
@@ -255,8 +256,8 @@ const EngagementTrendChart = () => {
       {/* Gradient definition */}
       <defs>
         <linearGradient id="trendGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#10B981" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#10B981" stopOpacity="0" />
+          <stop offset="0%" stopColor="#10B981" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="#10B981" stopOpacity="0.02" />
         </linearGradient>
       </defs>
 
@@ -266,8 +267,8 @@ const EngagementTrendChart = () => {
         y1={padding}
         x2={padding}
         y2={height - padding}
-        stroke="#475569"
-        strokeWidth="2"
+        stroke="#E5E7EB"
+        strokeWidth="1"
       />
 
       {/* X-axis */}
@@ -276,8 +277,8 @@ const EngagementTrendChart = () => {
         y1={height - padding}
         x2={width - padding}
         y2={height - padding}
-        stroke="#475569"
-        strokeWidth="2"
+        stroke="#E5E7EB"
+        strokeWidth="1"
       />
 
       {/* Grid lines and Y-axis labels */}
@@ -285,15 +286,7 @@ const EngagementTrendChart = () => {
         const y = height - padding - ((score - minScore) / scoreRange) * chartHeight
         return (
           <g key={score}>
-            <line
-              x1={padding - 5}
-              y1={y}
-              x2={padding}
-              y2={y}
-              stroke="#475569"
-              strokeWidth="1"
-            />
-            <text x={padding - 10} y={y + 4} textAnchor="end" fontSize="12" fill="#94A3B8">
+            <text x={padding - 10} y={y + 4} textAnchor="end" fontSize="12" fill="#9CA3AF">
               {score}
             </text>
             {score !== 100 && (
@@ -302,7 +295,7 @@ const EngagementTrendChart = () => {
                 y1={y}
                 x2={width - padding}
                 y2={y}
-                stroke="#334155"
+                stroke="#F3F4F6"
                 strokeWidth="1"
                 strokeDasharray="4,4"
               />
@@ -319,14 +312,15 @@ const EngagementTrendChart = () => {
         points={points.map((p) => `${p.x},${p.y}`).join(' ')}
         fill="none"
         stroke="#10B981"
-        strokeWidth="3"
+        strokeWidth="2.5"
+        strokeLinejoin="round"
       />
 
       {/* Data points */}
       {points.map((p, idx) => (
         <g key={idx}>
           <circle cx={p.x} cy={p.y} r="5" fill="#10B981" />
-          <circle cx={p.x} cy={p.y} r="3" fill="#0F172A" />
+          <circle cx={p.x} cy={p.y} r="2.5" fill="white" />
         </g>
       ))}
 
@@ -340,7 +334,7 @@ const EngagementTrendChart = () => {
             y={height - padding + 20}
             textAnchor="middle"
             fontSize="12"
-            fill="#94A3B8"
+            fill="#6B7280"
           >
             {month}
           </text>
@@ -357,25 +351,25 @@ export default function AnalyticsPage() {
     {
       label: 'Total Monitored',
       value: 847,
-      icon: '👥',
+      icon: <Users className="w-5 h-5 text-emerald-500" />,
     },
     {
       label: 'Flight Risk',
       value: 18,
       subtext: '2.1% of workforce',
-      icon: '⚠️',
+      icon: <AlertTriangle className="w-5 h-5 text-amber-500" />,
     },
     {
       label: 'Burnout Trajectory',
       value: 7,
       subtext: 'At risk',
-      icon: '🔥',
+      icon: <Flame className="w-5 h-5 text-red-500" />,
     },
     {
       label: 'Avg Improvement',
       value: '+4.2%',
       subtext: 'vs last month',
-      icon: '📈',
+      icon: <TrendingUp className="w-5 h-5 text-emerald-500" />,
     },
   ]
 
@@ -388,31 +382,34 @@ export default function AnalyticsPage() {
     { name: 'After-hours activity', percentage: 8 },
   ]
 
+  const tabs = [
+    { key: 'reporting', label: 'Reporting' },
+    { key: 'predictive', label: 'Predictive' },
+    { key: 'scenarios', label: 'Scenarios' },
+  ]
+
   return (
-    <div className="p-8 bg-blob-darker min-h-screen">
+    <div className="p-8 bg-gray-50 min-h-screen">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-white mb-2">Analytics</h1>
-        <p className="text-blob-border">Deep dive into engagement trends and predictive insights</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-1">Analytics</h1>
+        <p className="text-gray-500">Deep dive into engagement trends and predictive insights</p>
       </div>
 
       {/* Tab Navigation */}
-      <div className="mb-8 border-b border-blob-border/20">
-        <div className="flex gap-0">
-          {['reporting', 'predictive', 'scenarios'].map((tab) => (
+      <div className="mb-8">
+        <div className="inline-flex bg-white rounded-lg border border-gray-200 p-1">
+          {tabs.map((tab) => (
             <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-6 py-4 font-medium text-sm transition-all duration-200 relative ${
-                activeTab === tab
-                  ? 'text-blob-primary'
-                  : 'text-blob-border hover:text-white'
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className={`px-5 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                activeTab === tab.key
+                  ? 'bg-emerald-500 text-white shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
               }`}
             >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              {activeTab === tab && (
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-blob-primary rounded-t"></div>
-              )}
+              {tab.label}
             </button>
           ))}
         </div>
@@ -426,14 +423,16 @@ export default function AnalyticsPage() {
             {statCards.map((stat, idx) => (
               <div
                 key={idx}
-                className="bg-blob-surface border border-blob-border/20 rounded-lg p-6 hover:border-blob-border/50 transition-all duration-200"
+                className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-all duration-200"
               >
-                <div className="flex items-start justify-between mb-2">
-                  <div className="text-2xl">{stat.icon}</div>
-                  <div className="text-xs text-blob-border/60">{stat.subtext}</div>
+                <div className="flex items-start justify-between mb-3">
+                  <div className="p-2 bg-gray-50 rounded-lg">{stat.icon}</div>
+                  {stat.subtext && (
+                    <span className="text-xs text-gray-400 font-medium">{stat.subtext}</span>
+                  )}
                 </div>
-                <p className="text-blob-border text-sm mb-2">{stat.label}</p>
-                <p className="text-3xl font-bold text-white">{stat.value}</p>
+                <p className="text-sm text-gray-500 mb-1">{stat.label}</p>
+                <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
               </div>
             ))}
           </div>
@@ -441,16 +440,16 @@ export default function AnalyticsPage() {
           {/* Charts Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             {/* Score Distribution Chart */}
-            <div className="bg-blob-surface border border-blob-border/20 rounded-lg p-6">
-              <h3 className="text-lg font-bold text-white mb-4">Score Distribution</h3>
+            <div className="bg-white rounded-xl border border-gray-200 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Score Distribution</h3>
               <div className="h-80 overflow-hidden">
                 <ScoreDistributionChart />
               </div>
             </div>
 
             {/* Department Comparison Chart */}
-            <div className="bg-blob-surface border border-blob-border/20 rounded-lg p-6">
-              <h3 className="text-lg font-bold text-white mb-4">Department Comparison</h3>
+            <div className="bg-white rounded-xl border border-gray-200 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Department Comparison</h3>
               <div className="h-80 overflow-hidden">
                 <DepartmentComparisonChart />
               </div>
@@ -458,8 +457,8 @@ export default function AnalyticsPage() {
           </div>
 
           {/* Engagement Trend Chart - Full Width */}
-          <div className="bg-blob-surface border border-blob-border/20 rounded-lg p-6 mb-8">
-            <h3 className="text-lg font-bold text-white mb-4">Engagement Trend (12 Months)</h3>
+          <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Engagement Trend (12 Months)</h3>
             <div className="h-80 overflow-hidden">
               <EngagementTrendChart />
             </div>
@@ -468,18 +467,18 @@ export default function AnalyticsPage() {
           {/* Risk Factors and Export Row */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Top Risk Factors */}
-            <div className="lg:col-span-2 bg-blob-surface border border-blob-border/20 rounded-lg p-6">
-              <h3 className="text-lg font-bold text-white mb-6">Top Risk Factors</h3>
-              <div className="space-y-4">
+            <div className="lg:col-span-2 bg-white rounded-xl border border-gray-200 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-6">Top Risk Factors</h3>
+              <div className="space-y-5">
                 {riskFactors.map((factor, idx) => (
                   <div key={idx}>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-white">{factor.name}</span>
-                      <span className="text-sm font-bold text-blob-primary">-{factor.percentage}%</span>
+                      <span className="text-sm font-medium text-gray-700">{factor.name}</span>
+                      <span className="text-sm font-semibold text-emerald-600">-{factor.percentage}%</span>
                     </div>
-                    <div className="h-2 bg-blob-darker rounded-full overflow-hidden">
+                    <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-blob-primary to-blue-500 rounded-full transition-all duration-500"
+                        className="h-full bg-gradient-to-r from-emerald-500 to-emerald-300 rounded-full transition-all duration-500"
                         style={{ width: `${factor.percentage}%` }}
                       />
                     </div>
@@ -489,19 +488,19 @@ export default function AnalyticsPage() {
             </div>
 
             {/* Export Buttons */}
-            <div className="bg-blob-surface border border-blob-border/20 rounded-lg p-6 flex flex-col justify-between">
+            <div className="bg-white rounded-xl border border-gray-200 p-6 flex flex-col justify-between">
               <div>
-                <h3 className="text-lg font-bold text-white mb-4">Export Data</h3>
-                <p className="text-sm text-blob-border mb-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Export Data</h3>
+                <p className="text-sm text-gray-500 mb-6">
                   Download your analytics reports in various formats
                 </p>
               </div>
               <div className="space-y-3">
-                <button className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-blob-primary text-white rounded-lg font-medium hover:bg-blob-primary/90 transition-all duration-200">
+                <button className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-emerald-500 text-white rounded-lg font-medium hover:bg-emerald-600 transition-all duration-200 shadow-sm">
                   <Download className="w-4 h-4" />
                   Export PDF
                 </button>
-                <button className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-blob-border/30 text-blob-primary rounded-lg font-medium hover:bg-blob-surface/50 hover:border-blob-primary/50 transition-all duration-200">
+                <button className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-50 hover:border-gray-300 transition-all duration-200">
                   <Download className="w-4 h-4" />
                   Export CSV
                 </button>
@@ -513,15 +512,15 @@ export default function AnalyticsPage() {
 
       {/* Predictive Tab Content */}
       {activeTab === 'predictive' && (
-        <div className="bg-blob-surface border border-blob-border/20 rounded-lg p-12 text-center">
-          <p className="text-blob-border text-lg">Predictive analytics features coming soon</p>
+        <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
+          <p className="text-gray-500 text-lg">Predictive analytics features coming soon</p>
         </div>
       )}
 
       {/* Scenarios Tab Content */}
       {activeTab === 'scenarios' && (
-        <div className="bg-blob-surface border border-blob-border/20 rounded-lg p-12 text-center">
-          <p className="text-blob-border text-lg">Scenario analysis features coming soon</p>
+        <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
+          <p className="text-gray-500 text-lg">Scenario analysis features coming soon</p>
         </div>
       )}
     </div>

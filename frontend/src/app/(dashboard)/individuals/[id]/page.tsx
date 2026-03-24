@@ -248,7 +248,7 @@ function AvatarWithScoreRing({ score }: { score: number }) {
 // Progression Card
 function ProgressionCard({ title, progress, xp, maxXp, status }: (typeof PROGRESSION_DATA)[0]) {
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4">
+    <div className="bg-white rounded-xl border border-gray-200 p-4">
       <div className="flex items-start justify-between mb-2">
         <h4 className="font-semibold text-gray-900 text-sm">{title}</h4>
         {status && <span className="text-xs font-semibold text-green-700 bg-green-50 px-2 py-1 rounded">{status}</span>}
@@ -270,7 +270,7 @@ function MetricCard({ name, score, change, description, type }: (typeof METRICS)
   const sparkData = isPositive ? [20, 25, 22, 28, 26, 30] : [30, 25, 28, 22, 24, 20]
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-5">
+    <div className="bg-white rounded-xl border border-gray-200 p-5">
       <div className="flex items-start justify-between mb-3">
         <h4 className="font-bold text-gray-900">{name}</h4>
         <div className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-semibold ${isPositive ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
@@ -323,7 +323,7 @@ export default function EmployeeProfilePage({
       </Link>
 
       {/* ===== EMPLOYEE HEADER ===== */}
-      <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+      <div className="bg-white rounded-xl border border-gray-200 p-8 mb-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left: Avatar + Name + Risk Badge */}
           <div className="flex flex-col items-center lg:items-start gap-4">
@@ -391,7 +391,7 @@ export default function EmployeeProfilePage({
         {/* Main Content Column */}
         <div className="lg:col-span-3 space-y-8">
           {/* Blob Score Fluctuation Chart */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-xl border border-gray-200 p-6">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg font-semibold text-gray-900">Blob Score Fluctuation</h3>
               <div className="flex items-center gap-3">
@@ -415,7 +415,7 @@ export default function EmployeeProfilePage({
           </div>
 
           {/* Engagement Volume Expanded Detail */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <div className="bg-white rounded-xl border border-gray-200 p-6">
             <div className="flex items-start justify-between mb-6">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-blob-primary/10 rounded-lg flex items-center justify-center">
@@ -492,10 +492,10 @@ export default function EmployeeProfilePage({
         {/* Right Sidebar */}
         <div className="space-y-6">
           {/* Risk Category Card */}
-          <div className="bg-blob-dark text-white rounded-lg p-5">
-            <h3 className="font-semibold mb-3">Risk Status</h3>
-            <p className="text-sm text-gray-300 mb-4">
-              Iron Man is in the <span className="font-semibold text-white">&ldquo;Risks&rdquo;</span> category and has been for over <span className="font-semibold text-white">4 weeks</span>.
+          <div className="bg-white rounded-xl border border-gray-200 p-5">
+            <h3 className="font-semibold text-gray-900 mb-3">Risk Status</h3>
+            <p className="text-sm text-gray-600 mb-4">
+              Iron Man is in the <span className="font-semibold text-gray-900">&ldquo;Risks&rdquo;</span> category and has been for over <span className="font-semibold text-gray-900">4 weeks</span>.
             </p>
             {/* Dot Matrix Visualization */}
             <svg width="100%" height="80" viewBox="0 0 200 80" preserveAspectRatio="xMidYMid meet" className="w-full">
@@ -516,13 +516,13 @@ export default function EmployeeProfilePage({
           </div>
 
           {/* Trophies Card */}
-          <div className="bg-blob-dark text-white rounded-lg p-5">
+          <div className="bg-white rounded-xl border border-gray-200 p-5">
             <div className="flex items-center gap-2 mb-4">
               <Award className="w-5 h-5 text-blob-primary" />
-              <h3 className="font-semibold">Trophies</h3>
+              <h3 className="font-semibold text-gray-900">Trophies</h3>
             </div>
-            <p className="text-sm text-gray-300 mb-4">4 Overall Trophies obtained in the past month</p>
-            <div className="space-y-3 border-t border-blob-border pt-3">
+            <p className="text-sm text-gray-600 mb-4">4 Overall Trophies obtained in the past month</p>
+            <div className="space-y-3 border-t border-gray-200 pt-3">
               {TROPHIES.map((trophy, idx) => (
                 <TrophyItem key={idx} {...trophy} />
               ))}
@@ -530,21 +530,21 @@ export default function EmployeeProfilePage({
           </div>
 
           {/* NLP Card */}
-          <div className="bg-blob-dark text-white rounded-lg p-5">
-            <h3 className="font-semibold mb-3">NLP Sentiment</h3>
-            <p className="text-sm text-gray-300 mb-4">
+          <div className="bg-white rounded-xl border border-gray-200 p-5">
+            <h3 className="font-semibold text-gray-900 mb-3">NLP Sentiment</h3>
+            <p className="text-sm text-gray-600 mb-4">
               Trend reversal, negative keywords increased in frequency over the past 3 weeks.
             </p>
             {/* Positive/Negative Bar */}
             <div className="space-y-2">
               <div className="flex items-center justify-between text-xs mb-2">
-                <span className="text-gray-300">Sentiment Balance</span>
+                <span className="text-gray-500">Sentiment Balance</span>
               </div>
-              <div className="flex h-6 rounded-full overflow-hidden border border-blob-border">
-                <div className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600" />
-                <div className="flex-1 bg-gradient-to-r from-pink-500 to-rose-600" />
+              <div className="flex h-6 rounded-full overflow-hidden border border-gray-200">
+                <div className="flex-1 bg-gradient-to-r from-green-500 to-emerald-400" />
+                <div className="flex-1 bg-gradient-to-r from-pink-400 to-rose-500" />
               </div>
-              <div className="flex justify-between text-xs text-gray-400 mt-2">
+              <div className="flex justify-between text-xs text-gray-500 mt-2">
                 <span>Positive 48%</span>
                 <span>Negative 52%</span>
               </div>
@@ -552,10 +552,10 @@ export default function EmployeeProfilePage({
           </div>
 
           {/* Working Patterns Card */}
-          <div className="bg-blob-dark text-white rounded-lg p-5">
-            <h3 className="font-semibold mb-3">Working Patterns</h3>
-            <p className="text-sm text-gray-300 mb-4">
-              Avg <span className="font-semibold">{WORKING_PATTERNS.avgHours}</span> per day. {WORKING_PATTERNS.change}.
+          <div className="bg-white rounded-xl border border-gray-200 p-5">
+            <h3 className="font-semibold text-gray-900 mb-3">Working Patterns</h3>
+            <p className="text-sm text-gray-600 mb-4">
+              Avg <span className="font-semibold text-gray-900">{WORKING_PATTERNS.avgHours}</span> per day. {WORKING_PATTERNS.change}.
             </p>
 
             {/* Daily Hours Visualization */}
@@ -588,31 +588,31 @@ export default function EmployeeProfilePage({
               })}
             </svg>
 
-            <div className="flex justify-between text-xs text-gray-300">
+            <div className="flex justify-between text-xs text-gray-500">
               <span>Start: {WORKING_PATTERNS.startTime}</span>
               <span>End: {WORKING_PATTERNS.endTime}</span>
             </div>
           </div>
 
           {/* Sociogram Card */}
-          <div className="bg-blob-dark text-white rounded-lg p-5">
-            <h3 className="font-semibold mb-3">Sociogram</h3>
-            <p className="text-sm text-gray-300 mb-4">Network and collaboration map</p>
+          <div className="bg-white rounded-xl border border-gray-200 p-5">
+            <h3 className="font-semibold text-gray-900 mb-3">Sociogram</h3>
+            <p className="text-sm text-gray-600 mb-4">Network and collaboration map</p>
             {/* Network Graph Preview */}
             <svg width="100%" height="150" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" className="w-full">
               {/* Connections */}
-              <line x1="100" y1="75" x2="50" y2="40" stroke="#334155" strokeWidth="1" />
-              <line x1="100" y1="75" x2="150" y2="40" stroke="#334155" strokeWidth="1" />
-              <line x1="100" y1="75" x2="60" y2="120" stroke="#334155" strokeWidth="1" />
-              <line x1="100" y1="75" x2="140" y2="120" stroke="#334155" strokeWidth="1" />
+              <line x1="100" y1="75" x2="50" y2="40" stroke="#D1D5DB" strokeWidth="1" />
+              <line x1="100" y1="75" x2="150" y2="40" stroke="#D1D5DB" strokeWidth="1" />
+              <line x1="100" y1="75" x2="60" y2="120" stroke="#D1D5DB" strokeWidth="1" />
+              <line x1="100" y1="75" x2="140" y2="120" stroke="#D1D5DB" strokeWidth="1" />
 
               {/* Central node */}
               <circle cx="100" cy="75" r="8" fill="#10B981" />
               {/* Connected nodes */}
-              <circle cx="50" cy="40" r="5" fill="#334155" />
-              <circle cx="150" cy="40" r="5" fill="#334155" />
-              <circle cx="60" cy="120" r="5" fill="#334155" />
-              <circle cx="140" cy="120" r="5" fill="#334155" />
+              <circle cx="50" cy="40" r="5" fill="#9CA3AF" />
+              <circle cx="150" cy="40" r="5" fill="#9CA3AF" />
+              <circle cx="60" cy="120" r="5" fill="#9CA3AF" />
+              <circle cx="140" cy="120" r="5" fill="#9CA3AF" />
             </svg>
           </div>
         </div>
